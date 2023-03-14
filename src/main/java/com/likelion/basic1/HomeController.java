@@ -1,12 +1,16 @@
 package com.likelion.basic1;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -49,6 +53,40 @@ public class HomeController {
         return a + b;
     }
 
+    @GetMapping("/home/returnBoolean")
+    @ResponseBody
+    public boolean showRereturnBooelean() {
+        return true;
+    }
+
+
+    @GetMapping("/home/returnMap")
+    @ResponseBody
+    public Map<String, Object> showReturnMap() {
+        Map<String, Object> map = new LinkedHashMap<>() {{
+            put("id", 1);
+            put("speed", 100);
+            put("age", 100);
+        }};
+        return map;
+    }
+
+    @GetMapping("/home/returnClassObj")
+    @ResponseBody
+    public Car showReturnClassObj() {
+        Car car = new Car(1, 100, "ferarri", new int[]{ 1, 2, 3 });
+
+        return car;
+    }
+
+    @GetMapping("/home/returnClassObj/v2")
+    @ResponseBody
+    public CarV2 showReturnClassObjv2() {
+        CarV2 carv2 = new CarV2(1, 100, "porsche", new int[]{ 1, 2, 3 });
+
+        return carv2;
+    }
+
     @GetMapping("/home/addPerson")
     @ResponseBody
     public String addPerson(@RequestParam(defaultValue = "0") String name, @RequestParam(defaultValue = "0") int age) {
@@ -56,12 +94,6 @@ public class HomeController {
         return id++ + "번 사람이 추가되었습니다.";
     }
 
-    @GetMapping("/home/addPerson")
-    @ResponseBody
-    public String removePerson(@RequestParam(defaultValue = "0") String name, @RequestParam(defaultValue = "0") int age) {
-        p.add(name, age);
-        return id++ + "번 사람이 추가되었습니다.";
-    }
 
     @GetMapping("/home/people")
     @ResponseBody
@@ -84,6 +116,46 @@ class People {
         return "People{" +
                 "list=" + list +
                 '}' + "\n";
+    }
+
+}
+
+@AllArgsConstructor
+@Getter
+class CarV2 {
+    private final int id;
+    private final int speed;
+    private final String name;
+    private final int[] relatedIds;
+}
+
+class Car {
+    private final int id;
+    private final int speed;
+    private final String name;
+    private final int[] relatedIds;
+
+    public Car(int id, int speed, String name, int[] relatedIds) {
+        this.id = id;
+        this.speed = speed;
+        this.name = name;
+        this.relatedIds = relatedIds;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int[] getRelatedIds() {
+        return relatedIds;
     }
 }
 
