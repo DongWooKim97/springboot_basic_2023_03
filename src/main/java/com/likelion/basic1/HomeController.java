@@ -2,10 +2,12 @@ package com.likelion.basic1;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
+    int count=0;
 
     //컴퓨터가 이해할 수 있는 주석
     // 개발자가 스트링부트에게 말함
@@ -26,5 +28,18 @@ public class HomeController {
     @ResponseBody
     public String showMain3() {
         return "수고하세요~";
+
+    }
+
+    @GetMapping("/home/main4")
+    @ResponseBody
+    public String showMain4() {
+        return "응답 : "+count++;
+    }
+
+    @GetMapping("/home/main5")
+    @ResponseBody
+    public int showMain5(@RequestParam(defaultValue = "0") int a, @RequestParam int b) {
+        return a+b;
     }
 }
