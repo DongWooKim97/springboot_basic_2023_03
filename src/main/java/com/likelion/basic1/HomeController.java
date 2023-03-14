@@ -56,6 +56,13 @@ public class HomeController {
         return id++ + "번 사람이 추가되었습니다.";
     }
 
+    @GetMapping("/home/addPerson")
+    @ResponseBody
+    public String removePerson(@RequestParam(defaultValue = "0") String name, @RequestParam(defaultValue = "0") int age) {
+        p.add(name, age);
+        return id++ + "번 사람이 추가되었습니다.";
+    }
+
     @GetMapping("/home/people")
     @ResponseBody
     public String showPeople() {
