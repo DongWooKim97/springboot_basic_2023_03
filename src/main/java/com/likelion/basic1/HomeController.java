@@ -2,6 +2,7 @@ package com.likelion.basic1;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,23 @@ public class HomeController {
         return "%d번 사람이 삭제되었습니다.".formatted(id);
     }
 
+    @GetMapping("/home/modifyPerson")
+    @ResponseBody
+    public String modifyPerson(int id, String name, int age) {
+        Person toModify = people.stream()
+                .filter(e -> e.getId() == id)
+                .findAny()
+                .orElse(null);
+        if (toModify == null) {
+            return "%d번 사람이 존재하지 않습니다.".formatted(id);
+        }
+
+        toModify.setAge(age);
+        toModify.setName(name);
+
+        return "%d번 사람이 수정되었습니다.".formatted(id);
+    }
+
 
 }
 
@@ -71,15 +89,15 @@ public class HomeController {
 @ToString
 class Person {
     private static int lastId;
+    private final int id;
+    @Setter
+    private int age;
+    @Setter
+    private String name;
 
     static {
         lastId = 0;
     }
-
-    private final int id;
-    private final int age;
-    private final String name;
-
 
     public Person(String name, int age) {
         this(++lastId, age, name);
