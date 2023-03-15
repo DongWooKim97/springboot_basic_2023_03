@@ -1,4 +1,4 @@
-package com.likelion.basic1;
+package com.likelion.basic1.boundedContext.home.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
