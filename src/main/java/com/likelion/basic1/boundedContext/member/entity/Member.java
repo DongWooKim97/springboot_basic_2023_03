@@ -1,10 +1,10 @@
 package com.likelion.basic1.boundedContext.member.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 @AllArgsConstructor
-@Getter
+@Data
 public class Member {
     private static long lastId;
     private final long id;

@@ -18,7 +18,7 @@ public class RsData {
         return new RsData(resultCode, msg, data);
     }
 
-    public boolean isSccuess() {
+    public boolean isSuccess() {
         return resultCode.startsWith("S-");
     }
 }

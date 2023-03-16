@@ -19,7 +19,11 @@ public class MemberService {
         } else if (!member.getPassword().equals(password)) {
             return RsData.of("F-2", "비밀번호가 일치하지 않습니다.");
         }
-        return RsData.of("S-1", "%s님 환영합니다.".formatted(username), member.getId());
+        return RsData.of("S-1", "%s님 환영합니다.".formatted(username), member);
+    }
+
+    public Member findByUsername(String username) {
+        return memberRepository.findByUserName(username);
     }
 
     public Member findById(long id) {
