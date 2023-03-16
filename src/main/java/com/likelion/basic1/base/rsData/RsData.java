@@ -6,11 +6,19 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class RsData {
-    private String resultCode;
-    private String msg;
+    private final String resultCode;
+    private final String msg;
+    private final Object data;
 
     public static RsData of(String resultCode, String msg) {
+        return of(resultCode, msg, null);
+    }
 
-        return new RsData(resultCode, msg);
+    public static RsData of(String resultCode, String msg, Object data) {
+        return new RsData(resultCode, msg, data);
+    }
+
+    public boolean isSccuess() {
+        return resultCode.startsWith("S-");
     }
 }

@@ -24,13 +24,13 @@ public class HomeController {
     private List<Person> people;
 
 
-    @Autowired
     private MemberService memberService;
 
-    
-    public HomeController() {
+    @Autowired
+    public HomeController(MemberService memberService) {
         count = 0;
         people = new ArrayList<>();
+        this.memberService = memberService;
     }
 
     @GetMapping("/home/returnMap")
